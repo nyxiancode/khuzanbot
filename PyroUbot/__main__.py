@@ -1,4 +1,3 @@
-.....
 import signal
 import tornado.ioloop
 import tornado.platform.asyncio
