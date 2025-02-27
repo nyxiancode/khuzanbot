@@ -10,3 +10,4 @@ from PyroUbot.core.database.userbot import *
 from PyroUbot.core.database.pref import *
 from PyroUbot.core.database.variabel import *
 from PyroUbot.core.database.antigcast import *
+from PyroUbot.core.database.logger import *
