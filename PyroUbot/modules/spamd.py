@@ -10,7 +10,6 @@ __MODULE__ = "spam 2"
 __HELP__ = """
 <blockquote>Bantuan Untuk Spam 2
 
-• Perintah : <code>{0}sdspm</code> [Waktu] [Balas ke pesan]
 • ᴘᴇʀɪɴᴛᴀʜ : <code>{0}sdspm</code> [ᴡᴀᴋᴛᴜ] [ʙᴀʟᴀs ᴋᴇ ᴘᴇsᴀɴ]  
 • ᴘᴇɴᴊᴇʟᴀsᴀɴ : ᴍᴇᴍᴜʟᴀɪ sᴘᴀᴍ ᴋᴇ ᴅᴀᴛᴀʙᴀsᴇ.  
 
