@@ -1,112 +1,57 @@
-import asyncio
-from pyrogram.errors import FloodWait
 from PyroUbot import *
+import asyncio
 
-spam_taksdb = {}
-
-kontol = False
-
-__MODULE__ = "spam 2"
+__MODULE__ = "dspam"
 __HELP__ = """
-<blockquote>Bantuan Untuk Spam 2
+<b>『 ʙᴀɴᴛᴜᴀɴ ᴜɴᴛᴜᴋ sᴘᴀᴍ 』</b>
 
-• ᴘᴇʀɪɴᴛᴀʜ : <code>{0}sdspm</code> [ᴡᴀᴋᴛᴜ] [ʙᴀʟᴀs ᴋᴇ ᴘᴇsᴀɴ]  
-• ᴘᴇɴᴊᴇʟᴀsᴀɴ : ᴍᴇᴍᴜʟᴀɪ sᴘᴀᴍ ᴋᴇ ᴅᴀᴛᴀʙᴀsᴇ.  
+<b>• ᴘᴇʀɪɴᴛᴀʜ:</b> <code>{0}dspam</code> [ᴊᴜᴍʟᴀʜ_ᴘᴇsᴀɴ - ᴊᴜᴍʟᴀʜ_ᴅᴇʟᴀʏ_ᴅᴇᴛɪᴋ - ᴘᴇsᴀɴ_sᴘᴀᴍ]
+<b>• ᴘᴇɴᴊᴇʟᴀsᴀɴ:</b> ᴜɴᴛᴜᴋ ᴍᴇɴɢɪʀɪᴍ ᴘᴇsᴀɴ ʙᴇʀᴜʟᴀɴɢ ᴅᴇɴɢᴀɴ ᴊᴇᴅᴀ ᴡᴀᴋᴛᴜ ᴛᴇʀᴛᴇɴᴛᴜ.
 
-• ᴘᴇʀɪɴᴛᴀʜ : <code>{0}stdspm</code>  
-• ᴘᴇɴᴊᴇʟᴀsᴀɴ : ᴍᴇɴɢʜᴇɴᴛɪᴋᴀɴ �ᴘʀᴏsᴇs sᴘᴀᴍ ᴅɪᴅᴀᴛᴀʙᴀsᴇ.  
-
-• ᴘᴇʀɪɴᴛᴀʜ : <code>{0}listspm</code>   
-• �ᴘᴇɴᴊᴇʟᴀsᴀɴ : ᴍᴇʟɪʜᴀᴛ ᴅᴀғᴛᴀʀ ɢʀᴜᴘ �ᴅɪᴅᴀʟᴀᴍ ᴅᴀᴛᴀʙᴀsᴇ.  
-
-• ᴘᴇʀɪɴᴛᴀʜ : <code>{0}addspm</code>   
-• ᴘᴇɴᴊᴇʟᴀsᴀɴ : ᴍᴇɴᴀᴍʙᴀʜᴋᴀɴ ɢʀᴜᴘ �ᴋᴇ ᴅᴀʟᴀᴍ ᴅᴀᴛᴀʙᴀsᴇ sᴘᴀᴍ.  
-
-• ᴘᴇʀɪɴᴛᴀʜ : <code>{0}delspm</code>   
-• ᴘᴇɴᴊᴇʟᴀsᴀɴ : ᴍᴇɴɢʜᴀᴘᴜs ɢʀᴜᴘ ᴅᴀʀɪ �ᴅᴀᴛᴀʙᴀsᴇ sᴘᴀᴍ.</blockquote>
+<b>ᴄᴏɴᴛᴏʜ:</b>
+<code>{0}dspam 10 2 ᴛᴇsᴛ sᴘᴀᴍ</code>
 """
 
-@PY.UBOT("sdspm")
-async def _(c, m):
-    global kontol
-
-    if not m.reply_to_message:
-        return await m.reply("<b>Silakan balas ke pesan !!</b>")
-    if len(m.command) != 2:
-        return await m.reply("<b>Silahkan balas ke pesan dan berikan waktu delay.</b>")
+async def dspam_cmd(client, message):
+    reply = message.reply_to_message
+    msg = await message.reply("sᴇᴅᴀɴɢ ᴅɪᴘʀᴏsᴇs", quote=False)
+    
     try:
-        interval = int(m.command[1])
-    except ValueError:
-        return await m.reply("<b>Waktu delay harus berupa angka.</b>")
-
-    scheduled_message = m.reply_to_message
-    chat_ids = monggo.ambil_spdb(c.me.id)
-    kontol = True
-    for chat_id in chat_ids:
-        if not kontol:
-            break
-        if interval < 10:
-            await m.reply(
-                f"<b>Minimal waktu delay 10 jangan  <code>{interval}</code></b>"
-            )
+        # Ambil jumlah pesan dan jeda waktu dari perintah
+        count_message = int(message.command[1])
+        count_delay = int(message.command[2])
+        
+        # Batasi jumlah pesan dan jeda waktu untuk mencegah penyalahgunaan
+        if count_message > 20:
+            return await msg.edit("❌ ᴍᴀᴋsɪᴍᴀʟ 20 ᴘᴇsᴀɴ ᴘᴇʀ ᴘᴇʀɪɴᴛᴀʜ.")
+        if count_delay < 1:
+            return await msg.edit("❌ ᴊᴇᴅᴀ ᴡᴀᴋᴛᴜ ᴍɪɴɪᴍᴀʟ 1 ᴅᴇᴛɪᴋ.")
+        
+        # Jika pesan adalah balasan
+        if reply:
+            for i in range(count_message):
+                await reply.copy(message.chat.id)
+                await asyncio.sleep(count_delay)
         else:
-            async def send_scheduled_message(chat_id):
-                try:
-                    while True:
-                        await asyncio.sleep(interval)
-                        await scheduled_message.copy(chat_id)
-                except FloodWait:
-                    if chat_id in spam_taksdb:
-                        task = spam_taksdb[chat_id]
-                        task.cancel()
-                        del spam_taksdb[chat_id]
-
-            task = asyncio.create_task(send_scheduled_message(chat_id))
-            spam_taksdb[chat_id] = task
-    kontol = False
-    await m.reply(f"<b>Processing Spam To Database !</b>")
-
-@PY.UBOT("stdspm")
-async def _(c, m):
-    global kontol
-    if not any(task for task in spam_taksdb.values()):
-        return await m.reply_text("<b>Tidak ada pengiriman spam yang sedang berlangsung.</b>")
+            # Jika pesan bukan balasan, pastikan ada teks spam
+            if len(message.command) < 4:
+                return await msg.edit("❌ ᴍᴏʜᴏɴ ʙᴇʀɪᴋᴀɴ ᴘᴇsᴀɴ sᴘᴀᴍ. ᴋᴇᴛɪᴋ <code>{0}help dspam</code> ᴜɴᴛᴜᴋ ʙᴀɴᴛᴜᴀɴ.")
+            text_to_spam = message.text.split(None, 3)[3]
+            for i in range(count_message):
+                await message.reply(text_to_spam, quote=False)
+                await asyncio.sleep(count_delay)
+        
+        # Hapus pesan "sedang diproses" dan pesan perintah
+        await msg.delete()
+        await message.delete()
     
-    chat_ids = monggo.ambil_spdb(c.me.id)
-    for chat_id in chat_ids:
-        if chat_id in spam_taksdb:
-            task = spam_taksdb[chat_id]
-            task.cancel()
-            del spam_taksdb[chat_id]
-    
-    kontol = False
-    await m.reply("<b>Spam database dihentikan.</b>")
+    except IndexError:
+        await msg.edit("❌ ᴍᴏʜᴏɴ ʙᴇʀɪᴋᴀɴ ᴘᴀʀᴀᴍᴇᴛᴇʀ ʏᴀɴɢ ʙᴇɴᴀʀ. ᴋᴇᴛɪᴋ <code>{0}help dspam</code> ᴜɴᴛᴜᴋ ʙᴀɴᴛᴜᴀɴ.")
+    except ValueError:
+        await msg.edit("❌ ᴍᴏʜᴏɴ ʙᴇʀɪᴋᴀɴ ᴀɴɢᴋᴀ ʏᴀɴɢ ʙᴇɴᴀʀ.")
+    except Exception as error:
+        await msg.edit(f"❌ ᴛᴇʀᴊᴀᴅɪ ᴋᴇsᴀʟᴀʜᴀɴ: {str(error)}")
 
-@PY.UBOT("listspm")
-async def _(c, m):
-    teks = "<b>Daftar Database Spam:</b>\n\n"
-    user_id = c.me.id
-    lists = monggo.ambil_spdb(user_id)
-    if len(lists) == 0:
-        await m.reply("<b>Database kosong.</b>")
-    else:
-        for count, chat_id in enumerate(lists, 1):
-            teks += f"{count}. <code>{chat_id}</code>\n"
-        await m.reply(teks)
-
-@PY.UBOT("addspm|delspm")
-async def _(c, m):
-    user_id = c.me.id  # ID akun bot/user yang menjalankan perintah
-    chat_id = m.command[1] if len(m.command) > 1 else m.chat.id
-
-    if m.command[0] == "addspm":
-        monggo.tambah_spdb(user_id, chat_id)
-        pesan_konfirmasi = f"<code>{chat_id}</code> <b>Berhasil ditambahkan ke database.</b>"
-    elif m.command[0] == "delspm":
-        monggo.kureng_spdb(user_id, chat_id)
-        pesan_konfirmasi = f"<code>{chat_id}</code> <b>Berhasil dihapus dari database.</b>"
-    else:
-        return
-
-    # Kirim pesan konfirmasi ke Pesan Tersimpan (Saved Messages)
-    await c.send_message("me", pesan_konfirmasi)
+@PY.UBOT("dspam")
+async def dspam_handler(client, message):
+    await dspam_cmd(client, message)
