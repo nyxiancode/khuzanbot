@@ -21,9 +21,7 @@ async def dspam_cmd(client, message):
         count_message = int(message.command[1])
         count_delay = int(message.command[2])
         
-        # Batasi jumlah pesan dan jeda waktu untuk mencegah penyalahgunaan
-        if count_message > 20:
-            return await msg.edit("❌ ᴍᴀᴋsɪᴍᴀʟ 20 ᴘᴇsᴀɴ ᴘᴇʀ ᴘᴇʀɪɴᴛᴀʜ.")
+        # Batasi jeda waktu untuk mencegah penyalahgunaan
         if count_delay < 1:
             return await msg.edit("❌ ᴊᴇᴅᴀ ᴡᴀᴋᴛᴜ ᴍɪɴɪᴍᴀʟ 1 ᴅᴇᴛɪᴋ.")
         
@@ -46,9 +44,9 @@ async def dspam_cmd(client, message):
         await message.delete()
     
     except IndexError:
-        await msg.edit("❌ ᴍᴏʜᴏɴ ʙᴇʀɪᴋᴀɴ ᴘᴀʀᴀᴍᴇᴛᴇʀ ʏᴀɴɢ ʙᴇɴᴀʀ. ᴋᴇᴛɪᴋ <code>{0}help dspam</code> ᴜɴᴛᴜᴋ ʙᴀɴᴛᴜᴀɴ.")
+        await msg.edit("❌ ᴍᴏʜᴏɴ ʙᴇʀɪᴋᴀɴ �ᴀʀᴀᴍᴇᴛᴇʀ ʏᴀɴɢ ʙᴇɴᴀʀ. ᴋᴇᴛɪᴋ <code>{0}help dspam</code> �ɴᴛᴜᴋ ʙᴀɴᴛᴜᴀɴ.")
     except ValueError:
-        await msg.edit("❌ ᴍᴏʜᴏɴ ʙᴇʀɪᴋᴀɴ ᴀɴɢᴋᴀ ʏᴀɴɢ ʙᴇɴᴀʀ.")
+        await msg.edit("❌ �ᴏʜᴏɴ ʙᴇʀɪᴋᴀɴ ᴀɴɢᴋᴀ ʏᴀɴɢ ʙᴇɴᴀʀ.")
     except Exception as error:
         await msg.edit(f"❌ ᴛᴇʀᴊᴀᴅɪ ᴋᴇsᴀʟᴀʜᴀɴ: {str(error)}")
 
