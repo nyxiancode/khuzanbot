@@ -1,4 +1,4 @@
-....python-dotenv
+python-dotenv
 telegraph==2.2.0
 TgCrypto==1.2.5
 tornado==6.4.1
