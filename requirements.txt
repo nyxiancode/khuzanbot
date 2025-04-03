@@ -1,4 +1,4 @@
-python-dotenv
+....python-dotenv
 telegraph==2.2.0
 TgCrypto==1.2.5
 tornado==6.4.1
@@ -43,3 +43,4 @@ httpx[http2]==0.27.2
 openai
 pydub
 search_engine_parser
+qrcode
